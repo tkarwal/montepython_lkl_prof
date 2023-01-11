@@ -804,7 +804,7 @@ def compute_lkl(cosmo, data):
                 "Could not write the current derived parameters")
 
     # DCH adding a check to make sure the derived_lkl are passed properly
-    if data.get_mcmc_parameters(['derived_lkl']) != []:
+    if data.get_mcmc_parameters(['derived_lkl']) != [] or hasattr(data,'derived_lkl'):
         try:
             for (name, value) in data.derived_lkl.items():
                 data.mcmc_parameters[name]['current'] = value
