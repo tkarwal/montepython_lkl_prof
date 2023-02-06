@@ -1451,8 +1451,8 @@ class Likelihood_mock_cmb(Likelihood):
             # (this case is usually not useful/relevant)
             if self.Bmodes and (not self.delensing):
                     cl_lensed = self.get_cl(cosmo)
-                    for l in range(self.lmax+1):
-                        cl[l]['bb']=cl_lensed[l]['bb']
+                    for l in range(self.l_max+1):
+                        cl['bb'][l]=cl_lensed['bb'][l]
 
         # if we want lensed Cl's
         else:
@@ -1460,8 +1460,8 @@ class Likelihood_mock_cmb(Likelihood):
             # exception: for delensed B modes we need the unlensed spectrum
             if self.Bmodes and self.delensing:
                 cl_unlensed = self.get_unlensed_cl(cosmo)
-                for l in range(self.lmax+1):
-                        cl[l]['bb']=cl_unlensed[l]['bb']
+                for l in range(self.l_max+1):
+                        cl['bb'][l]=cl_unlensed['bb'][l]
 
         # get likelihood
         lkl = self.compute_lkl(cl, cosmo, data)
