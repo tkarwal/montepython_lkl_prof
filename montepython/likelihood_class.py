@@ -1451,7 +1451,7 @@ class Likelihood_mock_cmb(Likelihood):
             # (this case is usually not useful/relevant)
             if self.Bmodes and (not self.delensing):
                     cl_lensed = self.get_cl(cosmo)
-                    for l in range(self.l_max+1):
+                    for l in range(self.l_min,self.l_max+1):
                         cl['bb'][l]=cl_lensed['bb'][l]
 
         # if we want lensed Cl's
@@ -1460,7 +1460,7 @@ class Likelihood_mock_cmb(Likelihood):
             # exception: for delensed B modes we need the unlensed spectrum
             if self.Bmodes and self.delensing:
                 cl_unlensed = self.get_unlensed_cl(cosmo)
-                for l in range(self.l_max+1):
+                for l in range(self.l_min,self.l_max+1):
                         cl['bb'][l]=cl_unlensed['bb'][l]
 
         # get likelihood
@@ -1582,17 +1582,25 @@ class Likelihood_mock_cmb(Likelihood):
                     cltd_fid = self.Cl_fid[self.index_tp, l]
                     cltd = math.sqrt(l*(l+1.))*cl['tp'][l]
 
-                Cov_obs = np.array([
-                    [self.Cl_fid[0, l], self.Cl_fid[2, l], 0.*self.Cl_fid[self.index_tp, l]],
-                    [self.Cl_fid[2, l], self.Cl_fid[1, l], 0],
-                    [cltd_fid, 0, cldd_fid]])
-                Cov_the = np.array([
-                    [cl['tt'][l]+self.noise_T[l], cl['te'][l], 0.*math.sqrt(l*(l+1.))*cl['tp'][l]],
-                    [cl['te'][l], cl['ee'][l]+self.noise_P[l], 0],
-                    [cltd, 0, cldd+self.Nldd[l]]])
+                if self.OnlyTT:
+                    Cov_obs = np.array([
+                        [self.Cl_fid[0, l], 0.*self.Cl_fid[self.index_tp, l]],
+                        [cltd_fid, cldd_fid]])
+                    Cov_the = np.array([
+                        [cl['tt'][l]+self.noise_T[l],  0.*math.sqrt(l*(l+1.))*cl['tp'][l]],
+                        [cltd,  cldd+self.Nldd[l]]])
+                else:
+                    Cov_obs = np.array([
+                        [self.Cl_fid[0, l], self.Cl_fid[2, l], 0.*self.Cl_fid[self.index_tp, l]],
+                        [self.Cl_fid[2, l], self.Cl_fid[1, l], 0],
+                        [cltd_fid, 0, cldd_fid]])
+                    Cov_the = np.array([
+                        [cl['tt'][l]+self.noise_T[l], cl['te'][l], 0.*math.sqrt(l*(l+1.))*cl['tp'][l]],
+                        [cl['te'][l], cl['ee'][l]+self.noise_P[l], 0],
+                        [cltd, 0, cldd+self.Nldd[l]]])
 
 	    # case with TT only (Added by Siavash Yasini)
-            elif self.OnlyTT:
+            elif self.OnlyTT and not self.LensingExtraction:
                 Cov_obs = np.array([[self.Cl_fid[0, l]]])
 
                 Cov_the = np.array([[cl['tt'][l]+self.noise_T[l]]])
