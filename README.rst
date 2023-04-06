@@ -15,7 +15,20 @@ for the bibtex entries).
 
 Recent changelog
 ----------------
+v3.5.0, Sep 20, 2021
+
+* Added framework for spectral distortions likelihoods, plus mock FIRAS and PIXIE (D. C. Hooper, M. Lucca, N. Schoeneberg)
+
+* Added new Pantheon likelihood with prior on the absolute magnitude (D. Camarena)
+
+* Updated Pantheon likelihood to latest value
+
+* Various bugfixes related to python2 / python3 compatibility (D. C. Hooper, N. Schoeneberg)
+
+* Various additional bugfixes
+
 v3.4.0, Feb 25, 2021
+
 * Added BBN likelihoods from 1907.11594 (N. Schoeneberg, D. C. Hooper)
 
 * Added H0LICOW likelihoods from 1907.04869 (S. Taubenberger, S. Suyu)
