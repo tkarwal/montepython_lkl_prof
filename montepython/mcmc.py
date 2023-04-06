@@ -311,8 +311,8 @@ def chain(cosmo, data, command_line):
             with open(fname, 'w') as f:
                 f.write('# minimized \chi^2 = {:} \n'.format(min_chi2))
                 f.write('# %s\n' % ', '.join(['%16s' % label for label in labels]))
-                for idx in xrange(len(labels)):
-                    bf_value = minimum[idx]
+                for idx,lab in enumerate(labels):
+                    bf_value = minimum[idx]*data.mcmc_parameters[lab]['scale']
                     if bf_value > 0:
                         f.write(' %.6e\t' % bf_value)
                     else:
