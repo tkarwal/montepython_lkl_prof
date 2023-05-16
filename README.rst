@@ -15,6 +15,12 @@ for the bibtex entries).
 
 Recent changelog
 ----------------
+v3.6.0, May 17, 2023
+
+* Added Lyman-alpha alpha-beta-gamma-delta likelihood from 2206.08188 (D. C. Hooper, N. Schoeneberg, R. Murgia)
+
+* Various bugfixes and pull requests
+
 v3.5.0, Sep 20, 2021
 
 * Added framework for spectral distortions likelihoods, plus mock FIRAS and PIXIE (D. C. Hooper, M. Lucca, N. Schoeneberg)
