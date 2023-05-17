@@ -2,7 +2,7 @@
 Monte Python, a Monte Carlo Markov Chain code (with Class!)
 ===========================================================
 
-:Main developer: Thejs Brinckmann <brinckmann@physik.rwth-aachen.de>
+:Main developer: Thejs Brinckmann <thejs.brinckmann@gmail.com>
 :Author: Benjamin Audren <benjamin.audren@epfl.ch>
 :License: MIT
 
@@ -18,6 +18,8 @@ Recent changelog
 v3.6.0, May 17, 2023
 
 * Added Lyman-alpha alpha-beta-gamma-delta likelihood from 2206.08188 (D. C. Hooper, N. Schoeneberg, R. Murgia)
+
+* Added eBOSS DR16 BAO-only likelihoods (S. Alvi, T. Brinckmann)
 
 * Various bugfixes and pull requests
 

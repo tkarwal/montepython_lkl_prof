@@ -1,4 +1,5 @@
 v3.6.0  + Added Lyman-alpha alpha-beta-gamma-delta likelihood from 2206.08188 (D. C. Hooper, N. Schoeneberg, R. Murgia)
+        + Added eBOSS DR16 BAO-only likelihoods (S. Alvi, T. Brinckmann)
 	+ Various bugfixes and pull requests
 ---------------------------------------------------------------------
 v3.5.0  + Added framework for spectral distortions likelihoods, plus mock FIRAS and PIXIE (D. C. Hooper, M. Lucca, N. Schoeneberg)
