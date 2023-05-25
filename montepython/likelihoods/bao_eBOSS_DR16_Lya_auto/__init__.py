@@ -24,7 +24,7 @@ class bao_eBOSS_DR16_Lya_auto(Likelihood):
         for experiment in conflicting_experiments:
             if experiment in data.experiments:
                 raise io_mp.LikelihoodError(
-                    'eBOSS_DR16_Lya_auto reports conflicting BAO measurments from: %s' %(experiment))
+                    'bao_eBOSS_DR16_Lya_auto reports conflicting BAO measurments from: %s' %(experiment))
 
         # Read the datafile.
         print('Including eBOSS Lya-auto.')
@@ -50,6 +50,8 @@ class bao_eBOSS_DR16_Lya_auto(Likelihood):
         theo_DH_at_z_in_Mpc_inv = DH_at_z / rd
 
         # Interpolate the value within the spline and take the log.
+        # Note that the data contains a normalized likelihood, which
+        # is fine for MCMC, but is a problem for evidence calculations
         loglkl = np.log(float(self.lya_Interp(theo_DM_at_z, theo_DH_at_z_in_Mpc_inv)[0]))
 
-        return loglkl/2.0
+        return loglkl

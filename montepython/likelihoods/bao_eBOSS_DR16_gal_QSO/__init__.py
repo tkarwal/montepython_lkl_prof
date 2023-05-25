@@ -19,11 +19,12 @@ class bao_eBOSS_DR16_gal_QSO(Likelihood):
         conflicting_experiments = [
             'bao', 'bao_boss', 'bao_known_rs', 'bao_angular',
             'bao_boss_aniso', 'bao_boss_aniso_gauss_approx',
-            'bao_boss_dr12', 'bao_fs_boss_dr12']
+            'bao_boss_dr12', 'bao_fs_boss_dr12', 'bao_fs_boss_dr12_twobins',
+            'bao_fs_eBOSS_DR16_QSO', 'bao_fs_eBOSS_DR16_LRG']
         for experiment in conflicting_experiments:
             if experiment in data.experiments:
                 raise io_mp.LikelihoodError(
-                    'eBOSS_DR16_gal_QSO reports conflicting BAO measurments from: %s' %(experiment))
+                    'bao_eBOSS_DR16_gal_QSO reports conflicting BAO measurments from: %s' %(experiment))
 
         # define arrays for values of z and data points DM/r_s and DH/r_s.
         self.z = np.array([], 'float64')

@@ -16,13 +16,12 @@ class bao_eBOSS_DR16_ELG(Likelihood):
         Likelihood.__init__(self, path, data, command_line)
 
         # are there conflicting experiments?
-        #conflicting_experiments = [
-        #    'bao', 'bao_boss', 'bao_known_rs'
-        #    'bao_boss_aniso', 'bao_boss_aniso_gauss_approx']
-        #for experiment in conflicting_experiments:
-        #    if experiment in data.experiments:
-        #        raise io_mp.LikelihoodError(
-        #            'conflicting BAO measurments')
+        conflicting_experiments = [
+            'bao_fs_eBOSS_DR16_ELG']
+        for experiment in conflicting_experiments:
+            if experiment in data.experiments:
+                raise io_mp.LikelihoodError(
+                    'bao_eBOSS_DR16_ELG reports conflicting BAO measurments from: %s' %(experiment))
 
         # Read the datafile.
         print('Including eBOSS ELG.')
@@ -45,6 +44,8 @@ class bao_eBOSS_DR16_ELG(Likelihood):
         # Compute the theoretical value of the observable
         theo_DV_at_z = np.cbrt(self.elg_dr16_z_eff*DH_at_z*DM_at_z**2)/(rd)
         # Interpolate the value within the spline and take the log.
+        # Note that the data contains a normalized likelihood, which
+        # is fine for MCMC, but is a problem for evidence calculations
         loglkl = np.log(itp.splev(theo_DV_at_z, self.elg_DV_Interp))
 
-        return loglkl/2.0
+        return loglkl
