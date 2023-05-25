@@ -21,6 +21,8 @@ v3.6.0, May 17, 2023
 
 * Added eBOSS DR16 BAO-only likelihoods (S. Alvi, T. Brinckmann)
 
+* Added eBOSS DR16 BAO-plus likelihoods (V. Poulin, T. Brinckmann)
+
 * Various bugfixes and pull requests
 
 v3.5.0, Sep 20, 2021
