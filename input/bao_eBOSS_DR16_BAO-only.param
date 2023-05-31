@@ -21,7 +21,7 @@ data.cosmo_arguments['tau_reio'] = 0.06
 # Three massive neutrinos with sum(mnu)=0.06eV and Neff = 3.044
 data.cosmo_arguments['N_ur'] = 0.00441
 data.cosmo_arguments['N_ncdm'] = 1
-data.cosmo_arguments['deg_ncdm'] = 0.06
+data.cosmo_arguments['deg_ncdm'] = 3
 data.cosmo_arguments['m_ncdm'] = 0.02
 data.cosmo_arguments['T_ncdm'] = 0.71611
 
