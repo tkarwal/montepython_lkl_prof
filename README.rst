@@ -23,6 +23,8 @@ v3.6.0, May 17, 2023
 
 * Added eBOSS DR16 BAO-plus likelihoods (V. Poulin, T. Brinckmann)
 
+* Added Pantheon+ and Pantheon+SH0ES likelihoods (V. Poulin)
+
 * Added KiDS-1000 likelihoods (B. Stoelzner)
 
 * Added S_8 as sampling parameter (B. Stoelzner, T. Brinckmann)

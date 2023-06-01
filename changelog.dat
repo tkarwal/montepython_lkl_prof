@@ -1,6 +1,7 @@
 v3.6.0  + Added Lyman-alpha alpha-beta-gamma-delta likelihood from 2206.08188 (D. C. Hooper, N. Schoeneberg, R. Murgia)
         + Added eBOSS DR16 BAO-only likelihoods (S. Alvi, T. Brinckmann)
         + Added eBOSS DR16 BAO-plus likelihoods (V. Poulin, T. Brinckmann)
+        + Added Pantheon+ and Pantheon+SH0ES likelihoods (V. Poulin)
         + Added KiDS-1000 likelihoods (B. Stoelzner)
         + Added S_8 as sampling parameter (B. Stoelzner, T. Brinckmann)
         + Various bugfixes and pull requests
