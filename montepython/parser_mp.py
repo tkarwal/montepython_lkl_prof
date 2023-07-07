@@ -511,6 +511,9 @@ def create_parser():
         <**>--minimize-tol<**> : float
             <++>Tolerance for minimize algorithm<++>.
             Used by option --minimize (Default: 0.00001)<++>
+        <**>--lklfactor<**> : 1. 
+            <++>multiply likelihood difference by a factor<++> before evaluating new steps. 
+            This is useful for minimizations using MCMC<++>    
         <**>--fisher<**> : None
             <++>Calculates the Fisher matrix, its inverse, and then stop<++>.
             The inverse Fisher matrix can be used as a proposal distribution covmat,
@@ -779,6 +782,9 @@ def create_parser():
     # -- minimize argument, minimization tolerance (OPTIONAL)
     runparser.add_argument('--minimize-tol', help=helpdict['minimize-tol'], type=float,
                            dest='minimize_tol', default=0.00001)
+    # -- lklfactor (OPTIONAL) Factor likelihood differences # TK added 
+    runparser.add_argument('--lklfactor', help=helpdict['lklfactor'], type=float, 
+                           default = 1.)  
     # -- fisher (OPTIONAL)
     runparser.add_argument('--fisher', help=helpdict['fisher'],
                            action='store_true')
