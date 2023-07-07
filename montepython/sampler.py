@@ -28,6 +28,7 @@ from io_mp import dictitems,dictvalues,dictkeys
 import os
 import scipy.linalg as la
 import scipy.optimize as op
+from iminuit import minimize as minuit
 
 def run(cosmo, data, command_line):
     """
@@ -429,21 +430,31 @@ def get_minimum(cosmo, data, command_line, covmat):
 
     # For HST with 1 param the best is TNC with 'eps':stepsizes, bounds, tol, although bounds make it smlower (but avoids htting unphysical region)
     # For forecasts or Planck lite SLSQP with tol=0.00001 works well, but does not work for full Planck TTTEEE highl
-    result = op.minimize(chi2_eff,
-                         parameters,
-                         args = (cosmo,data),
-                         #method='trust-region-exact',
-                         #method='BFGS',
-                         #method='TNC',
-                         #method='L-BFGS-B',
-                         method='SLSQP',
-                         #options={'eps':stepsizes},
-                         #constraints=cons,
-                         bounds=bounds,
-                         tol=command_line.minimize_tol)
-                         #options = {'disp': True})
-                                    #'initial_tr_radius': stepsizes,
-                                    #'max_tr_radius': stepsizes})
+    # # TK, VP: commenting out original minimizer in MP in favour of minuit below
+    # result = op.minimize(chi2_eff,
+    #                      parameters,
+    #                      args = (cosmo,data),
+    #                      #method='trust-region-exact',
+    #                      #method='BFGS',
+    #                      #method='TNC',
+    #                      #method='L-BFGS-B',
+    #                      method='SLSQP',
+    #                      #options={'eps':stepsizes},
+    #                      #constraints=cons,
+    #                      bounds=bounds,
+    #                      tol=command_line.minimize_tol)
+    #                      #options = {'disp': True})
+    #                                 #'initial_tr_radius': stepsizes,
+    #                                 #'max_tr_radius': stepsizes})
+
+    # TK, VP: use minuit instead
+    print("Using minuit to minimize")
+    result = minuit(chi2_eff,
+                     parameters,
+                     args = (cosmo,data),
+                     bounds=bounds,
+                     tol=command_line.minimize_tol)
+
 
     #result = op.differential_evolution(chi2_eff,
     #                                   bounds,
@@ -451,7 +462,12 @@ def get_minimum(cosmo, data, command_line, covmat):
 
     print('Final output of minimize')
     for index,elem in enumerate(parameter_names):
-        print(elem, 'new:', result.x[index], ', old:', parameters[index])
+        # TK added rescaling of parameters:
+        # un_rescaled_params = result.x[index]*data.mcmc_parameters[elem]['scale']
+        # print(elem, 'rescaled:', result.x[index], ', correct scale:', un_rescaled_params )
+        result.x[index] *= data.mcmc_parameters[elem]['scale']
+        # TK finished rescaling
+        print(elem, 'new:', result.x[index], ', old:', parameters[index]*data.mcmc_parameters[elem]['scale'])
 
     #FK: return also min chi^2:
     return result.x, result.fun
